@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carson Bacci - Portfolio</title>
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --tag-bg: #eff6ff;
+            --tag-text: #3b82f6;
+            --btn-bg: #e0e7ff;
+            --btn-text: #4338ca;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 5%;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+
+        /* Interactive Card Grid (Experience & Projects) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .interactive-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            background-color: #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Custom image placeholder for the VUMAT card to match screenshot */
+        .vumat-img {
+            background: linear-gradient(135deg, #0000ff 0%, #00ff00 33%, #ffff00 66%, #ff0000 100%);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .card-desc {
+            color: #4b5563;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #c7d2fe;
+            align-self: flex-start;
+            transition: background-color 0.2s;
+        }
+
+        .interactive-card:hover .card-btn {
+            background-color: #c7d2fe;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 24, 39, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #111827;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .modal-body ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            color: #4b5563;
+        }
+
+        .modal-body li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Carson Bacci.</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Carson Bacci</span></h1>
+            <p>Mechanical & Thermal Engineer specializing in predictive controls, advanced fluid mechanics, and structural design. I translate complex models into robust physical systems.</p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="card-grid">
+            
+            <!-- Argus Card -->
+            <div class="interactive-card" onclick="openModal('modal-argus')">
+                <div class="card-img" style="background-color: #3b82f6; color: white;">[Drone/Hardware Image]</div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Mechanical Design</span>
+                        <span class="tag">Controls (MPC)</span>
+                        <span class="tag">3D Printing</span>
+                    </div>
+                    <h3 class="card-title">Lead Mechanical & Controls Engineer</h3>
+                    <p class="card-subtitle">Argus Dynamics | Berkeley, CA</p>
+                    <p class="card-desc">Spearheaded the mechanical design and control integration for advanced autonomous drone platforms, translating MPC requirements into actuator sizing.</p>
+                    <button class="card-btn">View Details 📄</button>
+                </div>
+            </div>
+
+            <!-- Titleist Card -->
+            <div class="interactive-card" onclick="openModal('modal-titleist')">
+                <div class="card-img" style="background-color: #10b981; color: white;">[FEA/Testing Image]</div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">HyperMesh</span>
+                        <span class="tag">LS-DYNA</span>
+                        <span class="tag">MATLAB</span>
+                    </div>
+                    <h3 class="card-title">R&D Engineering Intern</h3>
+                    <p class="card-subtitle">Titleist | San Diego, CA</p>
+                    <p class="card-desc">Accelerated product development by performing nonlinear finite element analysis and improving high-precision experimental testing systems.</p>
+                    <button class="card-btn">View Details 📄</button>
+                </div>
+            </div>
+
+            <!-- STAR Card -->
+            <div class="interactive-card" onclick="openModal('modal-star')">
+                <div class="card-img" style="background-color: #f59e0b; color: white;">[Rocket/Airframe Image]</div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Aerospace Design</span>
+                        <span class="tag">CAD</span>
+                        <span class="tag">Aerodynamics</span>
+                    </div>
+                    <h3 class="card-title">Air Frame Specialist</h3>
+                    <p class="card-subtitle">STAR | UC Berkeley</p>
+                    <p class="card-desc">Designed a high-performance rocket airframe targeting a 10,000-ft flight profile, integrating a multi-section liquid-propellant tank.</p>
+                    <button class="card-btn">View Details 📄</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="card-grid">
+            
+            <!-- VUMAT / Thermoelastic Card (Matching the user's uploaded image exactly) -->
+            <div class="interactive-card" onclick="openModal('modal-vumat')">
+                <div class="card-img vumat-img"></div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Fortran</span>
+                        <span class="tag">Abaqus</span>
+                    </div>
+                    <h3 class="card-title">Constitutive Modeling (VUMAT)</h3>
+                    <p class="card-subtitle">Thermoelastic Materials Simulations</p>
+                    <p class="card-desc">Derived finite-strain thermoelasticity subroutines for high-speed impact simulations.</p>
+                    <button class="card-btn">Read Report 📄</button>
+                </div>
+            </div>
+
+            <!-- F.I.R.E. Card -->
+            <div class="interactive-card" onclick="openModal('modal-fire')">
+                <div class="card-img" style="background-color: #ef4444; color: white;">[Robotics Image]</div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Arduino</span>
+                        <span class="tag">Heat Transfer</span>
+                    </div>
+                    <h3 class="card-title">F.I.R.E. Platform</h3>
+                    <p class="card-subtitle">ASME Societal Impact Award</p>
+                    <p class="card-desc">Developed an autonomous robotic fire detection and suppression platform for hazardous environments.</p>
+                    <button class="card-btn">Read Report 📄</button>
+                </div>
+            </div>
+
+            <!-- Heat Pipe Card -->
+            <div class="interactive-card" onclick="openModal('modal-heatpipe')">
+                <div class="card-img" style="background-color: #6366f1; color: white;">[Thermal Image]</div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Thermodynamics</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <h3 class="card-title">Heat Pipe Modeling</h3>
+                    <p class="card-subtitle">Two-Phase Heat Transfer Analysis</p>
+                    <p class="card-desc">Developed a numerical model predicting operating pressure, temperature, and chip cooling performance.</p>
+                    <button class="card-btn">Read Report 📄</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modals Container -->
+    <div id="modals-container">
+        
+        <!-- Modal: Argus -->
+        <div class="modal-overlay" id="modal-argus" onclick="closeModalOutside(event, 'modal-argus')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-argus')">&times;</button>
+                <div class="modal-header">
+                    <h2>Lead Mechanical and Controls Engineer</h2>
+                    <p>Argus Dynamics | Aug 2024 - Dec 2025</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Achieved a high strength-to-weight ratio required for aggressive flight maneuvers, validated through physical testing, by designing a quadrotor chassis from scratch and manufacturing it using composite Onyx 3D printing.</li>
+                        <li>Accelerated hardware iteration and field maintenance turnaround times by engineering a highly modular airframe architecture that seamlessly integrated COTS motors, sensors, batteries, and avionics.</li>
+                        <li>Demonstrated stable autonomous landing and thrust-saturation handling, verified through physical flight testing, by bridging the custom mechanical hardware platform with real-time predictive control architecture.</li>
+                        <li>Enabled precise trajectory tracking on moving targets by translating complex Model Predictive Control (MPC) requirements into physical actuator sizing and mechanical design constraints.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Titleist -->
+        <div class="modal-overlay" id="modal-titleist" onclick="closeModalOutside(event, 'modal-titleist')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-titleist')">&times;</button>
+                <div class="modal-header">
+                    <h2>R&D Engineering Intern</h2>
+                    <p>Titleist | Jun 2024 - Aug 2024</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Increased prototype testing throughput by 300%, measured through lab validation cycles, by redesigning mechanical components and instrumentation workflows for high-precision experimental testing systems.</li>
+                        <li>Optimized prototype structural performance, verified through physical testing, by performing nonlinear finite element analysis using HyperMesh and LS-DYNA to evaluate stress, deformation, and dynamic response.</li>
+                        <li>Reduced measurement uncertainty in testing systems, quantified through calibration datasets, by developing MATLAB-based data analysis tools and a custom GUI to analyze sensor accuracy and system tolerances.</li>
+                        <li>Accelerated product design iterations, demonstrated through consumer validation studies, by translating experimental test data into engineering recommendations for next-generation product performance improvements.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: STAR -->
+        <div class="modal-overlay" id="modal-star" onclick="closeModalOutside(event, 'modal-star')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-star')">&times;</button>
+                <div class="modal-header">
+                    <h2>Air Frame Specialist</h2>
+                    <p>STAR (Space Technology and Rocketry) | Sep 2022 - May 2024</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Designed a high-performance rocket airframe targeting a 10,000-ft flight profile, validated through structural analysis and stability margins, by applying CAD, structural mechanics, and aerodynamic trade studies.</li>
+                        <li>Maintained stable flight dynamics and aerodynamic stability, verified through center-of-gravity and center of pressure analysis, by conducting structural and aerodynamic trade studies across the full vehicle flight envelope.</li>
+                        <li>Enabled successful integration of a liquid-propellant tank system, demonstrated through structural compatibility and load transfer validation, by collaborating with propulsion engineers to design a multi-section tank within the airframe structure.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: VUMAT -->
+        <div class="modal-overlay" id="modal-vumat" onclick="closeModalOutside(event, 'modal-vumat')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-vumat')">&times;</button>
+                <div class="modal-header">
+                    <h2>Constitutive Modeling (VUMAT)</h2>
+                    <p>Thermoelastic Materials Simulations | Nov - Dec 2025</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Developed a nonlinear thermoelastic finite-strain material model, validated with &lt;1% error in thermal expansion, by implementing a custom Fortran VUMAT in Abaqus/Explicit with multiplicative kinematics and Hencky strain.</li>
+                        <li>Captured coupled thermo-mechanical response under large deformation, verified through numerical stability and convergence studies, by implementing temperature ramps and adiabatic thermoelastic coupling.</li>
+                        <li>Validated constitutive behavior across engineering materials, confirmed through mesh convergence studies, by simulating tensile and compressive loading of Al 7075, A2 steel, and NBR rubber.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: F.I.R.E. -->
+        <div class="modal-overlay" id="modal-fire" onclick="closeModalOutside(event, 'modal-fire')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-fire')">&times;</button>
+                <div class="modal-header">
+                    <h2>F.I.R.E. (Fire Intervention and Rescue Engine)</h2>
+                    <p>ASME Societal Impact Award Winner | Jan - May 2025</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Developed an autonomous robotic fire detection and suppression platform, demonstrated through systems testing, by integrating infrared sensing, tracked mobility, and targeted water-delivery mechanisms for hazardous environs.</li>
+                        <li>Evaluated system survivability against environmental thermal loads, verified by sustained operational performance in hazardous conditions, by performing heat transfer analysis to determine thermal shielding requirements.</li>
+                        <li>Enabled autonomous fire localization and suppression, validated through demonstrations, by applying embedded C++ control software that fused infrared sensor data with motor and servo actuation on an Arduino system.</li>
+                        <li>Achieved reliable mechanical and electrical system integration, verified through operational testing, by developing CAD assemblies and performing motor torque, power, and actuator sizing calculations.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Heat Pipe -->
+        <div class="modal-overlay" id="modal-heatpipe" onclick="closeModalOutside(event, 'modal-heatpipe')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-heatpipe')">&times;</button>
+                <div class="modal-header">
+                    <h2>Heat Pipe Modeling and Analysis</h2>
+                    <p>Jan - Mar 2026</p>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Developed a numerical model of a two-phase heat pipe to predict operating pressure, temperature, and chip cooling performance using thermodynamic relations, vapor flow analysis, and porous wick transport modeling.</li>
+                        <li>Increased feasible heat transfer capacity by up to 66% by conducting parametric and optimization studies on wick permeability, pore radius, and operating conditions while maintaining capillary stability.</li>
+                        <li>Reduced temperature prediction error to less than 2°C by validating against experimental data and calibrating evaporator conductance and condenser effectiveness across multiple operating conditions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Carson Bacci. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts for Modal Functionality -->
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function closeModalOutside(event, modalId) {
+            // Close if clicking the dark overlay directly (not the white box)
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+    </script>
+</body>
+</html>

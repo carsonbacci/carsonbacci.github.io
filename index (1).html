@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carson Bacci - Portfolio</title>
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #3730a3;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --tag-bg: #eff6ff;
+            --tag-text: #3b82f6;
+            --btn-bg: #e0e7ff;
+            --btn-text: #4338ca;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #home {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 5%;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+
+        /* Skills Matrix */
+        #skills {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-column { display: flex; flex-direction: column; }
+        .skill-header {
+            color: var(--primary-color); font-size: 0.9rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-color);
+        }
+        .skill-list { list-style: none; }
+        .skill-list li { font-size: 1.05rem; color: #374151; margin-bottom: 1rem; font-weight: 400; }
+
+        /* Interactive Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .interactive-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Image Wrapper for Cards */
+        .card-img-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e5e7eb;
+        }
+        
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .interactive-card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        /* VUMAT Specific CSS Gradient */
+        .vumat-img {
+            background: linear-gradient(135deg, #0000ff 0%, #00ff00 33%, #ffff00 66%, #ff0000 100%);
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .card-desc {
+            color: #4b5563;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #c7d2fe;
+            align-self: flex-start;
+            transition: background-color 0.2s;
+        }
+
+        .interactive-card:hover .card-btn { background-color: #c7d2fe; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(17, 24, 39, 0.7);
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000; backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 12px; width: 90%; max-width: 750px; max-height: 90vh;
+            overflow-y: auto; padding: 2.5rem; position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            font-size: 1.5rem; color: #6b7280; cursor: pointer;
+            background: none; border: none; transition: color 0.2s;
+        }
+
+        .close-btn:hover { color: #111827; }
+
+        .modal-header { margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;}
+        .modal-header h2 { font-size: 2rem; color: var(--text-color); margin-bottom: 0.5rem; }
+        .modal-header p { color: var(--primary-color); font-weight: 600; }
+
+        /* New 3-Part Section Layout for Modals */
+        .modal-section { margin-bottom: 1.5rem; }
+        .modal-section h4 { 
+            color: var(--primary-color); 
+            font-size: 1.05rem; 
+            margin-bottom: 0.5rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.5rem;
+        }
+        .modal-section p { color: #4b5563; line-height: 1.6; }
+
+        /* Footer */
+        footer { background-color: #1f2937; color: white; text-align: center; padding: 2rem 5%; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .skills-matrix { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Carson Bacci.</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Carson Bacci</span></h1>
+            <p>Mechanical & Thermal Engineer specializing in predictive controls, advanced fluid mechanics, and structural design. I translate advanced computational models into robust, high-performance physical systems.</p>
+        </div>
+    </section>
+
+    <!-- Skills Matrix Section -->
+    <section id="skills">
+        <div class="skills-matrix">
+            <div class="skill-column">
+                <div class="skill-header">Mechanical Design</div>
+                <ul class="skill-list">
+                    <li>SolidWorks / Fusion 360</li>
+                    <li>GD&T & DFM</li>
+                    <li>Rapid Prototyping & 3D Printing</li>
+                    <li>Finite Element Analysis</li>
+                    <li>Mechatronic Integration</li>
+                </ul>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">Dynamics & Control</div>
+                <ul class="skill-list">
+                    <li>Model Predictive Control</li>
+                    <li>Autonomous Flight Control</li>
+                    <li>Predictive Analytics</li>
+                    <li>Trajectory Optimization</li>
+                    <li>Data Analysis</li>
+                </ul>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">Software & Compute</div>
+                <ul class="skill-list">
+                    <li>Python & C++</li>
+                    <li>Machine Learning / PINNs</li>
+                    <li>MATLAB</li>
+                    <li>Internet of Things (IoT)</li>
+                    <li>Arduino & Embedded Systems</li>
+                </ul>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">Simulation</div>
+                <ul class="skill-list">
+                    <li>ANSYS Fluent</li>
+                    <li>Abaqus (FEA & Subroutines)</li>
+                    <li>LS-DYNA & HyperMesh</li>
+                    <li>SolidWorks Simulation</li>
+                    <li>Digital Twins</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="card-grid">
+            
+            <!-- Argus Card -->
+            <div class="interactive-card" onclick="openModal('modal-argus')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" alt="Drone Technology">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Mechanical Design</span>
+                        <span class="tag">Controls (MPC)</span>
+                        <span class="tag">3D Printing</span>
+                    </div>
+                    <h3 class="card-title">Lead Mechanical & Controls Engineer</h3>
+                    <p class="card-subtitle">Argus Dynamics | Berkeley, CA</p>
+                    <p class="card-desc">Spearheaded mechanical design and control integration for advanced autonomous drone platforms, directly translating complex MPC requirements into actuator sizing for dynamic targets.</p>
+                    <button class="card-btn">View Impact 📄</button>
+                </div>
+            </div>
+
+            <!-- Titleist Card -->
+            <div class="interactive-card" onclick="openModal('modal-titleist')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593111774240-d529f12eb4ae?auto=format&fit=crop&q=80&w=800" alt="Engineering Testing">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">HyperMesh</span>
+                        <span class="tag">LS-DYNA</span>
+                        <span class="tag">MATLAB</span>
+                    </div>
+                    <h3 class="card-title">R&D Engineering Intern</h3>
+                    <p class="card-subtitle">Titleist | San Diego, CA</p>
+                    <p class="card-desc">Accelerated product development and increased testing throughput by 300% through nonlinear FEA and the redesign of high-precision experimental workflows.</p>
+                    <button class="card-btn">View Impact 📄</button>
+                </div>
+            </div>
+
+            <!-- STAR Card -->
+            <div class="interactive-card" onclick="openModal('modal-star')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&q=80&w=800" alt="Rocket Launch">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Aerospace Design</span>
+                        <span class="tag">CAD</span>
+                        <span class="tag">Aerodynamics</span>
+                    </div>
+                    <h3 class="card-title">Air Frame Specialist</h3>
+                    <p class="card-subtitle">STAR | UC Berkeley</p>
+                    <p class="card-desc">Engineered a high-performance rocket airframe for a 10,000-ft flight profile, successfully integrating a multi-section liquid-propellant tank within strict stability margins.</p>
+                    <button class="card-btn">View Impact 📄</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Engineering Projects</h2>
+        <div class="card-grid">
+            
+            <!-- VUMAT Card -->
+            <div class="interactive-card" onclick="openModal('modal-vumat')">
+                <div class="card-img-wrapper">
+                    <div class="vumat-img"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Fortran</span>
+                        <span class="tag">Abaqus</span>
+                    </div>
+                    <h3 class="card-title">Constitutive Modeling (VUMAT)</h3>
+                    <p class="card-subtitle">Thermoelastic Materials Simulations</p>
+                    <p class="card-desc">Derived finite-strain thermoelasticity subroutines for high-speed impact simulations, validating behavior across multiple engineering materials.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- F.I.R.E. Card -->
+            <div class="interactive-card" onclick="openModal('modal-fire')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1580835239846-5bb9ce03c8c3?auto=format&fit=crop&q=80&w=800" alt="Robotics System">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Arduino</span>
+                        <span class="tag">Heat Transfer</span>
+                    </div>
+                    <h3 class="card-title">F.I.R.E. Platform</h3>
+                    <p class="card-subtitle">ASME Societal Impact Award Winner</p>
+                    <p class="card-desc">Developed an autonomous, track-mobile robotic fire detection and suppression platform equipped to survive extreme environmental thermal loads.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- PINN Solar Card -->
+            <div class="interactive-card" onclick="openModal('modal-pinn')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1509391366360-5156623d387f?auto=format&fit=crop&q=80&w=800" alt="Solar Panels">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">PINNs</span>
+                        <span class="tag">Thermal Modeling</span>
+                    </div>
+                    <h3 class="card-title">Solar Panel Thermal Simulations</h3>
+                    <p class="card-subtitle">Physics-Informed Neural Networks</p>
+                    <p class="card-desc">Predicted photovoltaic power output and mapped 2D temperature fields by coupling neural networks with fundamental heat transfer equations.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- Heat Sink Project -->
+            <div class="interactive-card" onclick="openModal('modal-heatsink')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Microprocessor Cooling">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Two-Phase Flow</span>
+                    </div>
+                    <h3 class="card-title">Remote Heat Sink System</h3>
+                    <p class="card-subtitle">Thermodynamic Modeling & Optimization</p>
+                    <p class="card-desc">Designed a robust R245fa microprocessor cooling system capable of rejecting 1,391 W of extreme heat flux using 1D steady-state thermodynamic models.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- Wind Tunnel Card -->
+            <div class="interactive-card" onclick="openModal('modal-windtunnel')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Wind Tunnel Aerodynamics">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Fluid Mechanics</span>
+                        <span class="tag">Wind Tunnel</span>
+                    </div>
+                    <h3 class="card-title">Golf Club Aerodynamics</h3>
+                    <p class="card-subtitle">Wind Tunnel Modifying & Testing</p>
+                    <p class="card-desc">Fabricated scaled models and analyzed drag profiles, utilizing strain gauges and Pitot tubes to translate experimental aerodynamic data into actionable models.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- Blunt Nose Missile Card -->
+            <div class="interactive-card" onclick="openModal('modal-missile')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1633419572622-48bd1ffed377?auto=format&fit=crop&q=80&w=800" alt="Supersonic Shockwave">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">ANSYS Fluent</span>
+                        <span class="tag">CFD</span>
+                        <span class="tag">Compressible Flow</span>
+                    </div>
+                    <h3 class="card-title">Blunt Nose Missile CFD Tests</h3>
+                    <p class="card-subtitle">Viscous Compressible Shock Analysis</p>
+                    <p class="card-desc">Characterized high-speed shock formation and enhanced bow shock resolution using pressure-gradient-based mesh refinement in ANSYS Fluent.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- CG Envelope Card -->
+            <div class="interactive-card" onclick="openModal('modal-cg')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800" alt="Aircraft Engineering">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Flight Dynamics</span>
+                        <span class="tag">Stability Margin</span>
+                    </div>
+                    <h3 class="card-title">CG Envelope & Stability</h3>
+                    <p class="card-subtitle">Aircraft Moment Modeling</p>
+                    <p class="card-desc">Computed allowable center of gravity envelopes across dynamic Mach ranges by building an aerodynamic trim model integrating wing-body moments and tail lift.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+            <!-- Heat Pipe Card -->
+            <div class="interactive-card" onclick="openModal('modal-heatpipe')">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1601247387342-6ee1cefbab28?auto=format&fit=crop&q=80&w=800" alt="Heat Exchanger">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">Thermodynamics</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <h3 class="card-title">Heat Pipe Modeling</h3>
+                    <p class="card-subtitle">Two-Phase Heat Transfer Analysis</p>
+                    <p class="card-desc">Developed a numerical model predicting operating pressure, temperature, and chip cooling performance through porous wick transport analysis.</p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modals Container -->
+    <div id="modals-container">
+        
+        <!-- EXPERIENCE MODALS -->
+        <div class="modal-overlay" id="modal-argus" onclick="closeModalOutside(event, 'modal-argus')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-argus')">&times;</button>
+                <div class="modal-header">
+                    <h2>Lead Mechanical and Controls Engineer</h2>
+                    <p>Argus Dynamics | Aug 2024 - Dec 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To develop an advanced autonomous drone platform capable of aggressive flight maneuvers and precise trajectory tracking for defense and strategic applications.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Designed a custom quadrotor chassis from scratch using composite Onyx 3D printing. Engineered a highly modular airframe architecture integrating commercial off-the-shelf components. Bridged the custom hardware with real-time predictive control architecture, translating complex Model Predictive Control (MPC) requirements into physical actuator sizing.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Achieved a high strength-to-weight ratio and accelerated hardware iteration turnaround times. Demonstrated stable autonomous landing and thrust-saturation handling during physical flight testing, and successfully presented technical briefings to senior Department of Defense (DoD) officials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-titleist" onclick="closeModalOutside(event, 'modal-titleist')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-titleist')">&times;</button>
+                <div class="modal-header">
+                    <h2>R&D Engineering Intern</h2>
+                    <p>Titleist | Jun 2024 - Aug 2024</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To accelerate product development and significantly improve the precision and throughput of experimental testing systems for next-generation equipment.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Performed nonlinear finite element analysis using HyperMesh and LS-DYNA. Redesigned mechanical components and instrumentation workflows. Developed MATLAB-based data analysis tools and a custom GUI to evaluate system tolerances and sensor accuracy.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Increased prototype testing throughput by 300%, optimized structural performance, and significantly reduced measurement uncertainty. Accelerated product design iterations by directly translating experimental test data into actionable engineering recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-star" onclick="closeModalOutside(event, 'modal-star')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-star')">&times;</button>
+                <div class="modal-header">
+                    <h2>Air Frame Specialist</h2>
+                    <p>STAR (Space Technology and Rocketry) | Sep 2022 - May 2024</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To design and successfully launch a high-performance rocket capable of reaching a 10,000-ft flight profile equipped with a complex liquid-propellant system.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Applied CAD, structural mechanics, and aerodynamic trade studies. Conducted center-of-gravity and center-of-pressure analyses across the full vehicle flight envelope. Collaborated closely with propulsion engineers to design a multi-section tank.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Developed an airframe that maintained robust flight dynamics and aerodynamic stability, enabling the successful physical integration and structural compatibility of the liquid-propellant tank system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT MODALS -->
+        <div class="modal-overlay" id="modal-vumat" onclick="closeModalOutside(event, 'modal-vumat')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-vumat')">&times;</button>
+                <div class="modal-header">
+                    <h2>Constitutive Modeling (VUMAT)</h2>
+                    <p>Thermoelastic Materials Simulations | Nov - Dec 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To accurately simulate the coupled thermo-mechanical response of engineering materials undergoing large deformations during high-speed impact events.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Implemented a custom Fortran VUMAT subroutine in Abaqus/Explicit utilizing multiplicative kinematics and Hencky strain. Implemented temperature ramps and adiabatic thermoelastic coupling to capture complex structural behaviors under extreme stress.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Developed a nonlinear thermoelastic finite-strain material model validated with &lt;1% error in thermal expansion. Successfully validated constitutive behavior across materials like Al 7075, A2 steel, and NBR rubber through rigorous mesh convergence studies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-fire" onclick="closeModalOutside(event, 'modal-fire')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-fire')">&times;</button>
+                <div class="modal-header">
+                    <h2>F.I.R.E. (Fire Intervention and Rescue Engine)</h2>
+                    <p>ASME Societal Impact Award Winner | Jan - May 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To create an autonomous robotic system capable of safely navigating, detecting, and suppressing fires in hazardous and extreme-heat environments.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Integrated infrared sensing, tracked mobility, and targeted water-delivery mechanisms. Applied embedded C++ control software on an Arduino system to fuse sensor data with motor actuation. Performed heat transfer analysis and CAD modeling to design thermal shielding and calculate motor torque requirements.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Won the ASME Societal Impact Award. Achieved highly reliable mechanical and electrical system integration, ensuring system survivability against environmental thermal loads and successfully demonstrating autonomous fire localization and suppression.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-pinn" onclick="closeModalOutside(event, 'modal-pinn')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-pinn')">&times;</button>
+                <div class="modal-header">
+                    <h2>Solar Panel Thermal Simulations</h2>
+                    <p>Physics-Informed Neural Networks | Aug - Dec 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To accurately predict photovoltaic power output and thermal behavior across varying environmental conditions to optimize overall solar panel efficiency.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Trained custom Physics-Informed Neural Networks (PINNs) by incorporating fundamental heat transfer partial differential equations directly into the machine learning loss function. Optimized network architectures and tuned hyperparameters for high-fidelity thermal prediction.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Accurately modeled 2D temperature fields across multi-layered panel assemblies, demonstrating a significant reduction in model loss, and successfully validated the framework's predictions against ground-truth thermal sensor data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-heatsink" onclick="closeModalOutside(event, 'modal-heatsink')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-heatsink')">&times;</button>
+                <div class="modal-header">
+                    <h2>Remote Heat Sink System</h2>
+                    <p>Thermodynamic Modeling & Optimization | April 2026</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To design a highly robust microprocessor cooling system capable of safely rejecting extreme heat flux from high-performance processing chips.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Developed a 1D steady-state thermodynamic model in MATLAB utilizing R245fa as the working fluid. Optimized the condenser architecture using the Effectiveness-NTU method. Evaluated two-phase flow, Friedel pressure drops, and nucleate pool boiling models.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Handled up to 1,391 W of extreme heat flux while safely maintaining target chip temperatures below 55°C. Achieved an 11% increase in thermal heat transfer with a minimal 1.09 kPa pressure drop, and accurately sized optimal tube lengths for complete condensation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-windtunnel" onclick="closeModalOutside(event, 'modal-windtunnel')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-windtunnel')">&times;</button>
+                <div class="modal-header">
+                    <h2>Golf Club Aerodynamics</h2>
+                    <p>Wind Tunnel Modifying and Testing | Feb - May 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To understand and minimize the aerodynamic drag of golf club heads during high-speed swings to improve overall player performance and swing speed.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Fabricated scaled models using SLA 3D printing and precision machining. Mapped comprehensive pressure and velocity distributions using precision strain gauges and multi-port Pitot tubes during high-frequency wind tunnel experimental runs.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Translated complex experimental aerodynamic data into predictive drag models that correlated directly with theoretical CFD flow separations, providing actionable design modifications to significantly reduce drag coefficients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-missile" onclick="closeModalOutside(event, 'modal-missile')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-missile')">&times;</button>
+                <div class="modal-header">
+                    <h2>Blunt Nose Missile CFD Tests</h2>
+                    <p>Viscous Compressible Shock Analysis | Jan - May 2025</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To characterize high-speed shock formation and compressible flow separation behaviors over blunt nose geometries for supersonic aerospace and defense applications.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Conducted viscous simulations using ANSYS Fluent density-based solvers. Implemented pressure-gradient-based mesh adaptation algorithms. Simulated flow behavior across increasing Mach numbers to map the sonic line shift relative to the geometry.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Achieved enhanced bow shock resolution and validated numerical compressible flow solutions with a &lt;1% error rate against analytical normal shock relations. Successfully mapped pressure, density, and temperature contour distributions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-cg" onclick="closeModalOutside(event, 'modal-cg')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-cg')">&times;</button>
+                <div class="modal-header">
+                    <h2>CG Envelope and Stability Margin Modeling</h2>
+                    <p>Aircraft Moment Modeling | Oct - Dec 2024</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To determine safe operational boundaries and identify necessary design modifications for aircraft by modeling their center of gravity (CG) envelope and dynamic stability.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Built an aerodynamic trim and stability model integrating wing-body moments, tail lift, and downwash effects. Derived analytical limits constrained by tail incidence, longitudinal moment balance, and static stability. Executed high-resolution numerical sweeps.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Computed the allowable CG envelope across dynamic aircraft weight and cruise Mach ranges. Produced industry-standard CG charts identifying unstable regions, which informed critical design modifications for tail authority and overall aerodynamic geometry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-heatpipe" onclick="closeModalOutside(event, 'modal-heatpipe')">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-heatpipe')">&times;</button>
+                <div class="modal-header">
+                    <h2>Heat Pipe Modeling and Analysis</h2>
+                    <p>Two-Phase Heat Transfer Analysis | Jan - Mar 2026</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>To enhance microchip cooling performance by accurately modeling and optimizing the two-phase heat transfer capacity of advanced heat pipes.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>Developed a numerical model predicting operating pressure, temperature, and chip cooling using thermodynamic relations, vapor flow analysis, and porous wick transport modeling. Conducted parametric and optimization studies on wick permeability and pore radius.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>Increased feasible heat transfer capacity by up to 66% while successfully maintaining capillary stability. Reduced overall temperature prediction error to less than 2°C by validating against experimental data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Carson Bacci. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts for Modal Functionality -->
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeModalOutside(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -444,6 +444,26 @@
                     <button class="card-btn">Read Details 📄</button>
                 </div>
             </div>
+
+            <!-- Space Boiler Card -->
+            <div class="interactive-card" onclick="openModal('modal-boiler')">
+                <div class="card-img-wrapper">
+                    <img src="images/Boiler.png" alt="Potassium Boiler">
+                </div>
+                <div class="card-content">
+                    <div class="card-tags">
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Two-Phase Flow</span>
+                        <span class="tag">Heat Transfer</span>
+                    </div>
+                    <h3 class="card-title">Space Boiler Design</h3>
+                    <p class="card-subtitle">Potassium Rankine Cycle Analysis</p>
+                    <p class="card-desc">
+                        Developed and optimized a two-phase potassium boiler for a space-based Rankine power system using segment-by-segment thermal-fluid modeling and boiling heat transfer analysis.
+                    </p>
+                    <button class="card-btn">Read Details 📄</button>
+                </div>
+            </div>
             
             <!-- Heat Sink Project -->
             <div class="interactive-card" onclick="openModal('modal-heatsink')">
@@ -764,6 +784,43 @@ Collaborated with propulsion engineers to integrate a multi-section liquid-prope
             </div>
         </div>
 
+        <div class="modal-overlay" id="modal-boiler" onclick="closeModalOutside(event, 'modal-boiler')">
+            
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal-boiler')">&times;</button>
+
+                <div class="modal-header">
+                    <h2>Space Boiler Design and Optimization</h2>
+                    <p>Potassium Rankine Cycle Thermal Analysis | Jan - May 2026</p>
+                </div>
+        
+                <div class="modal-body">
+        
+                    <div class="modal-section">
+                        <h4>Motivation</h4>
+                        <p>
+                        Advanced space power systems often utilize closed-loop Rankine cycles to convert reactor heat into electrical power. This project focused on designing and optimizing a potassium boiler capable of efficiently vaporizing liquid potassium while minimizing pressure losses and hardware mass for long-duration space missions.
+                        </p>
+                    </div>
+        
+                    <div class="modal-section">
+                        <h4>Technical Approach</h4>
+                        <p>
+                        Developed a MATLAB-based thermal-fluid model that divided the boiler into 20 discrete segments to track local heat transfer, vapor quality, void fraction, and pressure drop. Implemented nucleate boiling, convective vaporization, and two-phase flow correlations alongside NTU-effectiveness heat exchanger methods to simulate potassium vaporization using liquid lithium as the heat source. Performed iterative parametric studies on operating pressure, tube diameter, coolant flow rate, and boiler geometry to evaluate system performance and identify design limitations.
+                        </p>
+                    </div>
+        
+                    <div class="modal-section">
+                        <h4>Outcomes</h4>
+                        <p>
+                        Predicted approximately 198 kW of heat transfer while achieving complete potassium vaporization at the boiler outlet. Optimized the boiler geometry to reduce required tube length by 22% while maintaining saturated-vapor conditions and identified thermodynamic constraints that limited achievable heat transfer despite increases in flow rate and geometric scaling. The final model provided a high-fidelity framework for evaluating two-phase thermal management systems used in advanced nuclear-powered spacecraft.
+                        </p>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        
         <div class="modal-overlay" id="modal-heatsink" onclick="closeModalOutside(event, 'modal-heatsink')">
             <div class="modal-content">
                 <button class="close-btn" onclick="closeModal('modal-heatsink')">&times;</button>
